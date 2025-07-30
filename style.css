@@ -1,0 +1,1356 @@
+/* ==========================================
+   CALCULADORA PENAL RP - REDESIGN STYLES (V2)
+   ========================================== */
+
+/* 1. IMPORTS E VARIÁVEIS GLOBAIS
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Cores - Modo Escuro (Baseado no logo MIAMI) */
+  --bg-dark: #1a1a1f; /* Fundo principal mais escuro */
+  --card-bg-dark: #25252c; /* Fundo dos cards/containers um pouco mais claro */
+  --text-dark: #e0e0e5; /* Cor do texto principal (levemente off-white) */
+  --text-muted-dark: #8a8a93; /* Cor do texto secundário/muted */
+  --border-dark: #3a3a43; /* Cor das bordas */
+  --accent-dark: #4394ef; /* Rosa/Magenta do logo */
+  --accent-hover-dark: #86baf5; /* Hover mais claro/vibrante */
+  --secondary-accent-dark: #4394ef; /* Azul do logo */
+  --success-dark: #28a745; /* Verde para sucesso */
+  --danger-dark: #dc3545; /* Vermelho para perigo/erro */
+  --shadow-dark: rgba(0, 0, 0, 0.25);
+
+  /* Cores - Modo Claro (Harmonizado com o novo background) */
+  --bg-light: #faf8fc; /* Fundo principal com leve tom rosado */
+  --card-bg-light: rgba(255, 255, 255, 0.85); /* Cards com transparência sutil */
+  --text-light: #2d1b3d; /* Texto principal mais escuro para contraste */
+  --text-muted-light: #6b4c7a; /* Texto secundário com tom roxo suave */
+  --border-light: rgba(139, 69, 139, 0.2); /* Bordas com tom magenta suave */
+  --accent-light: #d946ef; /* Rosa/Magenta vibrante do logo */
+  --accent-hover-light: #e879f9; /* Hover mais claro */
+  --secondary-accent-light: #3b82f6; /* Azul do logo */
+  --success-light: #059669; /* Verde para sucesso */
+  --danger-light: #dc2626; /* Vermelho para perigo/erro */
+  --shadow-light: rgba(139, 69, 139, 0.15); /* Sombras com tom magenta */
+
+  /* Variáveis de Tema (serão atualizadas via JS ou classe no HTML) */
+  --bg-color: var(--bg-dark);
+  --card-bg-color: var(--card-bg-dark);
+  --text-color: var(--text-dark);
+  --text-muted-color: var(--text-muted-dark);
+  --border-color: var(--border-dark);
+  --accent-color: var(--accent-dark);
+  --accent-hover-color: var(--accent-hover-dark);
+  --secondary-accent-color: var(--secondary-accent-dark);
+  --success-color: var(--success-dark);
+  --danger-color: var(--danger-dark);
+  --shadow-color: var(--shadow-dark);
+
+  /* Tipografia */
+  --font-family: 'Poppins', sans-serif;
+
+  /* Outros */
+  --border-radius: 6px; /* Levemente menos arredondado */
+  --transition-speed: 0.2s;
+}
+
+/* Aplica tema claro */
+html:not(.dark) {
+  --bg-color: var(--bg-light);
+  --card-bg-color: var(--card-bg-light);
+  --text-color: var(--text-light);
+  --text-muted-color: var(--text-muted-light);
+  --border-color: var(--border-light);
+  --accent-color: var(--accent-light);
+  --accent-hover-color: var(--accent-hover-light);
+  --secondary-accent-color: var(--secondary-accent-light);
+  --success-color: var(--success-light);
+  --danger-color: var(--danger-light);
+  --shadow-color: var(--shadow-light);
+}
+
+/* 2. RESET E ESTILOS BASE
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: color var(--transition-speed) ease, background-image var(--transition-speed) ease;
+  overflow-x: hidden;
+}
+
+/* Background específico para modo escuro */
+html.dark body {
+  background-image: url('assets/images/BACKGROUND_DARK.png');
+}
+
+/* Background específico para modo claro */
+html:not(.dark) body {
+  background-image: url('assets/images/BACKGROUND_LIGHT.png');
+}
+
+h1, h2, h3 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.3rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem; font-weight: 500; }
+h3 { font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500; color: var(--text-muted-color); }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--accent-hover-color);
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 3. LAYOUT PRINCIPAL E CONTAINER
+   ========================================== */
+.app-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 900px; /* Um pouco mais estreito */
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+}
+
+.steps-container {
+  flex-grow: 1;
+}
+
+.step-card {
+  max-width: 850px; /* Largura mais ampla conforme solicitado */
+  width: 100%; /* Ocupar toda a largura disponível até o máximo */
+  margin: 0 auto 2rem auto; /* Centralizar horizontalmente */
+  background-color: rgba(37, 37, 44, 0.85); /* Transparência leve no modo escuro */
+  backdrop-filter: blur(8px); /* Efeito de desfoque para modernidade */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+  padding: 2rem 2.5rem;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+}
+
+/* Ajuste para modo claro */
+html:not(.dark) .step-card {
+  background-color: rgba(255, 255, 255, 0.75); /* Transparência mais sutil */
+  border: 1px solid rgba(139, 69, 139, 0.15); /* Borda com tom magenta */
+  box-shadow: 0 8px 32px rgba(139, 69, 139, 0.1); /* Sombra com tom magenta */
+  backdrop-filter: blur(12px); /* Desfoque mais pronunciado */
+}
+
+/* 4. TELA INICIAL
+   ========================================== */
+.initial-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-out;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Overlay específico para modo claro */
+html:not(.dark) .initial-screen {
+  background-color: rgba(139, 69, 139, 0.15); /* Overlay magenta suave */
+}
+
+.initial-content {
+  max-width: 500px;
+}
+
+.initial-screen h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.initial-screen p {
+  font-size: 1rem;
+  color: var(--text-muted-color);
+  margin-bottom: 2.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 4.1. LOGOTIPOS DINÂMICOS
+   ========================================== */
+/* Controle de visibilidade dos logotipos baseado no tema */
+.logo-light, .logo-dark {
+  transition: opacity var(--transition-speed) ease;
+}
+
+/* Modo escuro: mostra logo escuro, esconde logo claro */
+html.dark .logo-light {
+  display: none;
+}
+
+html.dark .logo-dark {
+  display: block;
+}
+
+/* Modo claro: mostra logo claro, esconde logo escuro */
+html:not(.dark) .logo-light {
+  display: block;
+}
+
+html:not(.dark) .logo-dark {
+  display: none;
+}
+
+/* Estilos específicos para os logotipos */
+.initial-logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.header-logo {
+  max-width: 120px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* 5. CABEÇALHO E BARRA DE PROGRESSO
+   ========================================== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+#progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.progress-step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--card-bg-color);
+  border: 2px solid var(--border-color);
+  color: var(--text-muted-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.progress-step.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
+}
+
+.progress-step.completed {
+  background-color: transparent;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.progress-line {
+  height: 2px;
+  width: 35px;
+  background-color: var(--border-color);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.progress-line.active {
+  background-color: var(--accent-color);
+}
+
+/* 6. FORMULÁRIOS
+   ========================================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-muted-color);
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: var(--bg-color); /* Fundo igual ao body */
+  color: var(--text-color);
+  transition: border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background-color: var(--card-bg-color); /* Leve destaque no foco */
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+}
+
+/* Definir --accent-rgb com base no modo */
+:root {
+  --accent-rgb: 255, 26, 140; /* RGB do accent-dark (ff1a8c) */
+}
+html:not(.dark) {
+  --accent-rgb: 255, 26, 140; /* RGB do accent-light (ff1a8c) */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Checkboxes Personalizados (AJUSTADO) */
+.custom-checkbox {
+  display: flex; /* Usar flex para alinhar */
+  align-items: center; /* Alinhar verticalmente */
+  cursor: pointer;
+  margin-bottom: 0.8rem;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none; /* Esconde o checkbox original */
+}
+
+/* Caixa do Checkbox (antes do texto) */
+.custom-checkbox .checkbox-visual {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 0.8rem; /* Espaço entre caixa e texto */
+  position: relative;
+  transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  background-color: transparent;
+  flex-shrink: 0; /* Evita que a caixa encolha */
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-visual {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-visual::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Texto do Checkbox */
+.custom-checkbox .checkbox-label {
+    line-height: 1.4; /* Melhorar alinhamento vertical do texto */
+}
+
+.atenuantes,
+.check-group {
+  display: flex;
+  flex-direction: column; /* Um por linha para melhor leitura */
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Grupo de Busca */
+.search-group {
+  margin-bottom: 1.5rem;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted-color);
+}
+
+.search-wrapper input[type="text"] {
+  padding-left: 2.8rem;
+}
+
+/* 7. LISTA DE ARTIGOS E TABELA
+   ========================================== */
+.lista-artigos {
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--bg-color);
+}
+
+.lista-artigos .custom-checkbox {
+  margin-bottom: 0.6rem; /* Menor espaçamento na lista */
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.tabela-artigos {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.tabela-artigos th,
+.tabela-artigos td {
+  padding: 0.8rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.tabela-artigos th:last-child,
+.tabela-artigos td:last-child {
+    text-align: center;
+}
+
+.tabela-artigos thead th {
+  background-color: var(--card-bg-color);
+  font-weight: 600;
+  color: var(--text-muted-color);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.tabela-artigos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-artigos tbody tr:hover {
+  background-color: rgba(var(--accent-rgb), 0.08);
+}
+
+.tabela-artigos tfoot {
+  font-weight: 600;
+  background-color: var(--card-bg-color);
+  border-top: 2px solid var(--border-color);
+}
+
+.tabela-artigos tfoot td {
+  border-bottom: none;
+  color: var(--text-color);
+}
+
+/* 8. BOTÕES
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.btn i {
+  font-size: 1em;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover-color);
+  border-color: var(--accent-hover-color);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-muted-color);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: #fff;
+}
+
+.btn-success:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(var(--success-rgb, 40, 167, 69), 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(var(--danger-rgb, 220, 53, 69), 0.2);
+  transform: translateY(-2px);
+}
+
+/* Definir RGBs para success e danger */
+:root {
+  --success-rgb: 40, 167, 69; /* success-dark */
+  --danger-rgb: 220, 53, 69; /* danger-dark */
+}
+html:not(.dark) {
+  --success-rgb: 25, 135, 84; /* success-light */
+  --danger-rgb: 220, 53, 69; /* danger-light */
+}
+
+.btn-large {
+  padding: 1rem 2.2rem;
+  font-size: 1.05rem;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+/* Botão de remover na tabela */
+.tabela-artigos .btn-danger {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85em;
+}
+
+/* 9. RESUMO
+   ========================================== */
+.resumo-box {
+  background-color: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.resumo-box p {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.resumo-box strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.resumo-box hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1rem 0;
+}
+
+.resumo-box img {
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  max-width: 250px;
+  border: 1px solid var(--border-color);
+}
+
+/* 10. RODAPÉ
+    ========================================== */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted-color);
+  font-size: 0.9rem;
+}
+
+/* 11. BOTÃO DE TEMA
+    ========================================== */
+#theme-toggle {
+  position: fixed;
+  bottom: 1.5rem; /* Movido para baixo */
+  right: 1.5rem;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted-color);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 3px 8px var(--shadow-color);
+  transition: all var(--transition-speed) ease;
+}
+
+#theme-toggle:hover {
+  color: var(--accent-color);
+  box-shadow: 0 5px 12px var(--shadow-color);
+  transform: scale(1.05);
+}
+
+#theme-toggle .fa-sun {
+  display: none;
+}
+#theme-toggle .fa-moon {
+  display: block;
+}
+
+html.dark #theme-toggle .fa-sun {
+  display: block;
+}
+html.dark #theme-toggle .fa-moon {
+  display: none;
+}
+
+/* 12. NOTIFICAÇÕES
+    ========================================== */
+#notification-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.notification {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border-left: 5px solid var(--accent-color);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-left-color: var(--success-color);
+}
+
+.notification.error {
+    border-left-color: var(--danger-color);
+}
+
+.notification i {
+    font-size: 1.2em;
+}
+
+.notification.success i {
+    color: var(--success-color);
+}
+
+.notification.error i {
+    color: var(--danger-color);
+}
+
+/* 13. UTILITÁRIOS E SCROLLBAR
+    ========================================== */
+.styled-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.styled-scroll::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 10px;
+}
+
+.styled-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 10px;
+  border: 2px solid var(--bg-color);
+}
+
+.styled-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted-color);
+}
+
+.lista-artigos, .table-responsive, .resumo-box {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--bg-color);
+}
+
+/* 14. RESPONSIVIDADE
+    ========================================== */
+@media (max-width: 992px) {
+  .app-container {
+    padding: 1.5rem 1rem;
+    max-width: 100%;
+  }
+  .step-card {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center; /* Centralizar no mobile */
+  }
+  #progress-bar {
+    width: 100%;
+    justify-content: center;
+  }
+  .progress-line {
+    width: 25px;
+  }
+  .botoes {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .botoes button {
+    width: 100%;
+  }
+  .step-card {
+    padding: 1.5rem;
+  }
+  #notification-container {
+    width: calc(100% - 2rem);
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+  .step-card {
+    padding: 1.2rem;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .initial-screen h1 {
+    font-size: 1.8rem;
+  }
+  .initial-screen p {
+    font-size: 0.95rem;
+  }
+  .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .btn-large {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+  #theme-toggle {
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+  .header-title {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+body {
+  background-image: url('assets/images/BACKGROUND.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.initial-screen {
+  background-color: rgba(0, 0, 0, 0.6); /* Adiciona um overlay escuro para o background */
+}
+
+
+
+
+.initial-logo {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.header-logo {
+  height: 40px; /* Ajuste conforme necessário */
+  margin-right: 1rem;
+}
+
+
+
+
+/* Ajustes para centralizar o logo */
+.initial-logo {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  max-width: 200px;
+  height: auto;
+}
+
+.header-logo {
+  max-width: 120px;
+  height: auto;
+}
+
+
+/* Ajuste para o container principal para centralizar os cards */
+.app-container {
+  max-width: 1200px; /* Largura máxima maior para acomodar cards mais amplos */
+  padding: 2rem 1rem; /* Padding responsivo */
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Os cards ocupam toda a largura disponível */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .step-card {
+    max-width: 100%;
+    margin: 0 0.5rem 2rem 0.5rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .initial-logo {
+    max-width: 150px;
+  }
+}
+
+/* Ajuste para o rodapé */
+.app-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted-color);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.app-footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-footer a:hover {
+  color: var(--accent-hover-color);
+  text-decoration: underline;
+}
+
+
+
+
+/* ==========================================
+   ESTILOS PARA BUSCA DE USUÁRIOS DISCORD
+   ========================================== */
+
+/* Seção de Seleção de Policiais */
+.police-selection-section {
+  background-color: rgba(var(--accent-rgb), 0.05);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.police-selection-section h3 {
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.police-selection-section h4 {
+  color: var(--text-muted-color);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Wrapper da Busca de Usuários */
+.user-search-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Resultados da Busca */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: rgba(var(--accent-rgb), 0.1);
+}
+
+.search-result-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid var(--border-color);
+}
+
+.search-result-info {
+  flex-grow: 1;
+}
+
+.search-result-name {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+}
+
+.search-result-roles {
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+}
+
+.search-result-role {
+  background-color: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  margin-right: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Estados de Seleção */
+.selected-officer, .selected-officers-list {
+  min-height: 60px;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  background-color: var(--bg-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.selected-officer.has-selection, .selected-officers-list.has-selection {
+  border-style: solid;
+  border-color: var(--accent-color);
+  background-color: rgba(var(--accent-rgb), 0.05);
+}
+
+.no-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted-color);
+  font-style: italic;
+  gap: 0.5rem;
+}
+
+/* Item de Policial Selecionado */
+.selected-officer-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.selected-officer-item:hover {
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.selected-officer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid var(--accent-color);
+}
+
+.selected-officer-info {
+  flex-grow: 1;
+}
+
+.selected-officer-name {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+}
+
+.selected-officer-roles {
+  font-size: 0.8rem;
+  color: var(--text-muted-color);
+}
+
+.selected-officer-role {
+  background-color: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent-color);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+  margin-right: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* Botão de Remoção */
+.remove-officer-btn {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  font-size: 0.8rem;
+}
+
+.remove-officer-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+}
+
+/* Seção Manual */
+.manual-input-section {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+  opacity: 0.7;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.manual-input-section:hover {
+  opacity: 1;
+}
+
+/* Estados de Loading */
+.search-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--text-muted-color);
+}
+
+.search-loading i {
+  margin-right: 0.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Estados de Erro */
+.search-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--danger-color);
+  background-color: rgba(var(--danger-rgb), 0.1);
+  border-radius: var(--border-radius);
+  margin: 0.5rem;
+}
+
+.search-error i {
+  margin-right: 0.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .police-selection-section {
+    padding: 1rem;
+  }
+  
+  .search-result-item {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .search-result-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .selected-officer-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .selected-officer-item {
+    padding: 0.6rem;
+  }
+}
+
+
+/* ==========================================
+   MODAL DE SELEÇÃO DE USUÁRIO
+   ========================================== */
+
+.user-selection-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.user-selection-content {
+  position: relative;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.user-selection-content h4 {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.user-selection-preview {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.selection-preview-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid var(--accent-color);
+}
+
+.selection-preview-info {
+  flex-grow: 1;
+}
+
+.selection-preview-name {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+}
+
+.selection-preview-roles {
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+}
+
+.user-selection-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.user-selection-buttons .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Responsividade do Modal */
+@media (max-width: 480px) {
+  .user-selection-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .selection-preview-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .user-selection-buttons {
+    gap: 0.6rem;
+  }
+}
+

@@ -1,0 +1,230 @@
+[
+  {
+    "id": 1, "descricao": "Azaralhamento", "pena": 100, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 2, "descricao": "Prisão Militar", "pena": 100, "multa": 0, "fianca": 0
+  },
+  {
+    "id": 3, "descricao": "Prevaricação", "pena": 100, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 4, "descricao": "Invasão de Departamento Policial", "pena": 100, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 5, "descricao": "Tentativa de Homicídio", "pena": 40, "multa": 100000, "fianca": null
+  },
+  {
+    "id": 6, "descricao": "Homicídio Culposo", "pena": 15, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 7, "descricao": "Homicídio Doloso", "pena": 15, "multa": 120000, "fianca": null
+  },
+  {
+    "id": 8, "descricao": "Homicídio Doloso Qualificado", "pena": 40, "multa": 100000, "fianca": null
+  },
+  {
+    "id": 9, "descricao": "Omissão de Socorro", "pena": 15, "multa": 40000, "fianca": 60000
+  },
+  {
+    "id": 10, "descricao": "Lesão Corporal", "pena": 40, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 11, "descricao": "Sequestro", "pena": 50, "multa": 200000, "fianca": null
+  },
+  {
+    "id": 12, "descricao": "Assédio", "pena": 500, "multa": 1000000, "fianca": null
+  },
+  {
+    "id": 13, "descricao": "Calúnia", "pena": 15, "multa": 30000, "fianca": 45000
+  },
+  {
+    "id": 14, "descricao": "Injúria", "pena": 15, "multa": 30000, "fianca": 45000
+  },
+  {
+    "id": 15, "descricao": "Difamação", "pena": 15, "multa": 30000, "fianca": 45000
+  },
+  {
+    "id": 16, "descricao": "Invasão de Propriedade", "pena": 15, "multa": 40000, "fianca": 60000
+  },
+  {
+    "id": 17, "descricao": "Perturbação do Sossego Alheio", "pena": 10, "multa": 30000, "fianca": 45000
+  },
+  {
+    "id": 18, "descricao": "Ameaça", "pena": 50, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 19, "descricao": "Extorsão", "pena": 40, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 20, "descricao": "Peculato", "pena": 60, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 21, "descricao": "Falsidade Ideológica", "pena": 30, "multa": 90000, "fianca": 135000
+  },
+  {
+    "id": 22, "descricao": "Tráfico de Influência", "pena": 10, "multa": 30000, "fianca": 45000
+  },
+  {
+    "id": 23, "descricao": "Abuso de Autoridade", "pena": 100, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 24, "descricao": "Falsa Comunicação de Crime", "pena": 5, "multa": 20000, "fianca": 30000
+  },
+  {
+    "id": 25, "descricao": "Tentativa de Suborno", "pena": 25, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 26, "descricao": "Uso Indevido do Sistema de Emergência", "pena": 20, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 27, "descricao": "Desacato", "pena": 10, "multa": 50000, "fianca": null
+  },
+  {
+    "id": 28, "descricao": "Desobediência", "pena": 50, "multa": 80000, "fianca": 120000
+  },
+  {
+    "id": 29, "descricao": "Obstrução da Justiça", "pena": 20, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 30, "descricao": "Ocultação de Provas", "pena": 15, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 31, "descricao": "Resistência à Prisão", "pena": 20, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 32, "descricao": "Dano ao Patrimônio Público", "pena": 25, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 33, "descricao": "Atentado ao Pudor", "pena": 50, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 34, "descricao": "Associação Criminosa", "pena": 30, "multa": 65000, "fianca": 97500
+  },
+  {
+    "id": 35, "descricao": "Apologia ao Crime", "pena": 5, "multa": 20000, "fianca": 30000
+  },
+  {
+    "id": 36, "descricao": "Posse de Arma em Público", "pena": 40, "multa": 70000, "fianca": 105500
+  },
+  {
+    "id": 37, "descricao": "Ocultação Facial", "pena": 1, "multa": 15000, "fianca": 0
+  },
+  {
+    "id": 38, "descricao": "Uso de Equipamentos Restritos", "pena": 10, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 39, "descricao": "Vadiagem", "pena": 50, "multa": 150000, "fianca": 225000
+  },
+  {
+    "id": 40, "descricao": "Vandalismo", "pena": 20, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 41, "descricao": "Réu Reincidente", "pena": 10, "multa": 15000, "fianca": 22500
+  },
+  {
+    "id": 42, "descricao": "Cúmplice", "pena": 5, "multa": 15000, "fianca": 22500
+  },
+  {
+    "id": 43, "descricao": "Tráfico de Armas (3 ou mais)", "pena": 60, "multa": 300000, "fianca": 450000
+  },
+  {
+    "id": 44, "descricao": "Tráfico de Itens Ilegais", "pena": 20, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 45, "descricao": "Tráfico de Munições (+ de 100)", "pena": 60, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 46, "descricao": "Tráfico de Drogas (+ de 100)", "pena": 50, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 47, "descricao": "Porte de Arma Pesada", "pena": 45, "multa": 200000, "fianca": 300000
+  },
+  {
+    "id": 48, "descricao": "Porte de Arma Leve", "pena": 35, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 49, "descricao": "Porte de Arma Branca", "pena": 1, "multa": 30000, "fianca": 0
+  },
+  {
+    "id": 50, "descricao": "Posse de Peças de Armas", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 51, "descricao": "Posse de Cápsulas", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 52, "descricao": "Posse de Munição (- de 100)", "pena": 40, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 53, "descricao": "Posse de Itens Ilegais", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 54, "descricao": "Aviãozinho (6 à 100)", "pena": 35, "multa": 70000, "fianca": 105000
+  },
+  {
+    "id": 55, "descricao": "Posse de Componentes Narcóticos", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 56, "descricao": "Posse de Drogas (1 a 5)", "pena": 1, "multa": 30000, "fianca": 0
+  },
+  {
+    "id": 57, "descricao": "Posse de Dinheiro Sujo", "pena": 30, "multa": 60000, "fianca": 90000
+  },
+  {
+    "id": 58, "descricao": "Desmanche de Veículos", "pena": 25, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 59, "descricao": "Roubo", "pena": 40, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 60, "descricao": "Furto a Caixa Eletrônico", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 61, "descricao": "Furto", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 62, "descricao": "Receptação de Veículos", "pena": 35, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 63, "descricao": "Roubo de Veículos", "pena": 40, "multa": 100000, "fianca": 150000
+  },
+  {
+    "id": 64, "descricao": "Tentativa de Furto", "pena": 10, "multa": 20000, "fianca": 30000
+  },
+  {
+    "id": 65, "descricao": "Furto de Veículos", "pena": 15, "multa": 40000, "fianca": 60000
+  },
+  {
+    "id": 66, "descricao": "Condução Imprudente", "pena": 15, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 67, "descricao": "Dirigir na Contra Mão", "pena": 1, "multa": 30000, "fianca": 0
+  },
+  {
+    "id": 68, "descricao": "Alta Velocidade", "pena": 1, "multa": 50000, "fianca": 0
+  },
+  {
+    "id": 69, "descricao": "Poluição Sonora", "pena": 10, "multa": 50000, "fianca": 75000
+  },
+  {
+    "id": 70, "descricao": "Corridas Ilegais", "pena": 1, "multa": 50000, "fianca": 0
+  },
+  {
+    "id": 71, "descricao": "Uso Excessivo de Insulfilm", "pena": 1, "multa": 25000, "fianca": 0
+  },
+  {
+    "id": 72, "descricao": "Direção sem Habilitação", "pena": 1, "multa": 25000, "fianca": 0
+  },
+  {
+    "id": 73, "descricao": "Estacionar em Área Proibida", "pena": 1, "multa": 25000, "fianca": 0
+  },
+  {
+    "id": 74, "descricao": "Não Ceder Passagem a Viaturas", "pena": 1, "multa": 25000, "fianca": 0
+  },
+  {
+    "id": 75, "descricao": "Impedir o Fluxo do Tráfego", "pena": 1, "multa": 50000, "fianca": 0
+  },
+  {
+    "id": 76, "descricao": "Veículo Muito Danificado", "pena": 1, "multa": 30000, "fianca": 0
+  }
+]

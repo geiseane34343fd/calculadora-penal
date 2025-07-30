@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark"> <!-- Mantendo dark como padrão inicial -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Penal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <link rel="manifest" href="assets/images/site.webmanifest">
+  <!-- Incluir biblioteca de ícones (ex: Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <!-- Container para Notificações -->
+  <div id="notification-container"></div>
+
+  <button id="theme-toggle" title="Alternar tema">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Tela Inicial -->
+  <div class="initial-screen" id="tela-inicial">
+    <div class="initial-content">
+      <!-- Logotipos dinâmicos baseados no tema -->
+      <img src="assets/images/LOGO_LIGHT.png" alt="Logo" class="initial-logo logo-light" />
+      <img src="assets/images/LOGO_DARK.png" alt="Logo" class="initial-logo logo-dark" />
+      <h1>Calculadora Penal</h1>
+      <p>Registre prisões de forma eficiente e integrada.</p>
+      <button class="btn btn-primary btn-large" onclick="iniciar()">
+        <i class="fas fa-play"></i> Registrar
+      </button>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal da Calculadora -->
+  <div class="app-container" id="main-content" style="display: none;">
+    <header class="app-header">
+      <!-- Logotipos dinâmicos baseados no tema -->
+      <img src="assets/images/LOGO_LIGHT.png" alt="Logo" class="header-logo logo-light" />
+      <img src="assets/images/LOGO_DARK.png" alt="Logo" class="header-logo logo-dark" />
+      <span class="header-title">Calculadora Penal</span>
+      <div id="progress-bar">
+        <div class="progress-step active" data-step="1">1</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="2">2</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="3">3</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="4">4</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="5">5</div>
+      </div>
+    </header>
+
+    <main class="steps-container">
+      <!-- Etapa 1: Dados do Detento -->
+      <div class="step-card" id="etapa1" style="display: none;">
+        <h2><i class="fas fa-user"></i> Dados do Detento</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome">Nome do detento:</label>
+            <input type="text" id="nome" placeholder="Nome completo" />
+          </div>
+          <div class="form-group">
+            <label for="id">ID do detento:</label>
+            <input type="text" id="id" placeholder="ID numérico" />
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone do detento:</label>
+            <input type="text" id="telefone" placeholder="Número de telefone" />
+          </div>
+          <div class="form-group">
+            <label for="foto">Link da foto do detento:</label>
+            <input type="text" id="foto" placeholder="URL da imagem" />
+          </div>
+        </div>
+        <div class="botoes">
+          <button class="btn btn-secondary" onclick="voltarTelaInicial()">Voltar ao Início</button>
+          <button class="btn btn-primary" onclick="proximaEtapa(2)">Avançar <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Etapa 2: Artigos -->
+      <div class="step-card" id="etapa2" style="display: none;">
+        <h2><i class="fas fa-gavel"></i> Artigos do Código Penal</h2>
+        <div class="form-group search-group">
+          <label for="busca-artigo">Pesquisar artigo:</label>
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="busca-artigo" oninput="filtrarArtigos()" placeholder="Ex: Art. 12 ou Assédio">
+          </div>
+        </div>
+
+        <div id="lista-artigos" class="lista-artigos styled-scroll"></div>
+
+        <h3><i class="fas fa-balance-scale-left"></i> Atenuantes</h3>
+        <div class="atenuantes">
+          <!-- Estrutura do label/input será ajustada no JS para colocar checkbox antes -->
+        </div>
+
+        <h3><i class="fas fa-gavel"></i> Agravantes</h3>
+        <div class="agravantes">
+          <!-- Estrutura do label/input será ajustada no JS para colocar checkbox antes -->
+        </div>
+
+        <h3><i class="fas fa-list-check"></i> Artigos Selecionados</h3>
+        <div class="table-responsive styled-scroll">
+          <table class="tabela-artigos">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Artigo</th>
+                <th>Descrição</th>
+                <th>Pena (meses)</th>
+                <th>Multa</th>
+                <th>Fiança</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-artigos"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3"><strong>Total com Atenuantes</strong></td>
+                <td id="total-pena">0</td>
+                <td id="total-multa">R$ 0,00</td>
+                <td id="total-fianca">R$ 0,00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="botoes">
+          <button class="btn btn-secondary" onclick="proximaEtapa(1)"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn btn-primary" onclick="proximaEtapa(3)">Avançar <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Etapa 3: Direitos -->
+      <div class="step-card" id="etapa3" style="display: none;">
+        <h2><i class="fas fa-shield-alt"></i> Direitos e Informações Legais</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome-advogado">Nome do Advogado:</label>
+            <input type="text" id="nome-advogado" placeholder="Nome do advogado (se houver)" />
+          </div>
+          <div class="form-group">
+            <label for="id-advogado">ID do Advogado:</label>
+            <input type="text" id="id-advogado" placeholder="ID do advogado (se houver)" />
+          </div>
+        </div>
+        <div class="form-group check-group">
+          <!-- Estrutura do label/input será ajustada no JS para colocar checkbox antes -->
+        </div>
+        <div class="botoes">
+          <button class="btn btn-secondary" onclick="proximaEtapa(2)"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn btn-primary" onclick="proximaEtapa(4)">Avançar <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Etapa 4: Boletim -->
+      <div class="step-card" id="etapa4" style="display: none;">
+        <h2><i class="fas fa-file-alt"></i> Boletim de Ocorrência</h2>
+        
+        <!-- Seção de Seleção de Policiais -->
+        <div class="police-selection-section">
+          <h3><i class="fas fa-user-shield"></i> Seleção de Policiais</h3>
+          
+          <!-- Busca de Usuários -->
+          <div class="form-group">
+            <label for="user-search">Buscar Policial:</label>
+            <div class="user-search-wrapper">
+              <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="user-search" placeholder="Digite o nome ou apelido do policial..." />
+              </div>
+              <div id="search-results" class="search-results" style="display: none;"></div>
+            </div>
+          </div>
+          
+          <!-- Policial Principal Selecionado -->
+          <div class="form-group">
+            <label>Policial Principal:</label>
+            <div id="selected-main-officer" class="selected-officer">
+              <div class="no-selection">
+                <i class="fas fa-user-plus"></i>
+                <span>Nenhum policial principal selecionado</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Policiais Auxiliares Selecionados -->
+          <div class="form-group">
+            <label>Policiais Auxiliares:</label>
+            <div id="selected-auxiliary-officers" class="selected-officers-list">
+              <div class="no-selection">
+                <i class="fas fa-users"></i>
+                <span>Nenhum policial auxiliar selecionado</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Opção Manual (Alternativa) -->
+          <div class="manual-input-section" style="margin-top: 2rem;">
+            <h4><i class="fas fa-keyboard"></i> Inserção Manual (Alternativa)</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="id-policial-manual">ID Discord do Policial Principal:</label>
+                <input type="text" id="id-policial-manual" placeholder="Seu ID do Discord" />
+              </div>
+              <div class="form-group">
+                <label for="ids-auxiliares-manual">IDs Discord dos Policiais Auxiliares:</label>
+                <input type="text" id="ids-auxiliares-manual" placeholder="IDs separados por vírgula" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boletim">Boletim de Ocorrência:</label>
+          <textarea id="boletim" rows="5" placeholder="Descreva detalhadamente os fatos..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="itens">Itens Apreendidos:</label>
+          <textarea id="itens" rows="5" placeholder="Liste os itens apreendidos (Ex: 1x Pistola, 30x Munições...)"></textarea>
+        </div>
+        <div class="botoes">
+          <button class="btn btn-secondary" onclick="proximaEtapa(3)"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn btn-primary" onclick="proximaEtapa(5)">Avançar <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Etapa 5: Resumo -->
+      <div class="step-card" id="etapa5" style="display: none;">
+        <h2><i class="fas fa-clipboard-check"></i> Resumo da Prisão</h2>
+        <div id="resumo-container" class="resumo-box styled-scroll"></div>
+        <div class="botoes">
+          <button class="btn btn-secondary" onclick="proximaEtapa(4)"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn btn-success" onclick="finalizarPrisao()"><i class="fas fa-paper-plane"></i> Finalizar e Enviar Prisão</button>
+        </div>
+         <div class="botoes" id="nova-prisao-container" style="display: none; margin-top: 20px; justify-content: center;">
+            <button class="btn btn-primary" onclick="location.reload()"><i class="fas fa-plus"></i> Criar Nova Prisão</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <!-- Logo removido -->
+      <p>Desenvolvido por <a href="https://discord.gg/AfhFb6ZNju" target="_blank">RAMAL SYSTEMS</a></p>
+      <!-- Logo removido -->
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
